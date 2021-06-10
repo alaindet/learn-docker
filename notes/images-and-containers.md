@@ -35,7 +35,7 @@ https://docs.docker.com/engine/reference/run/
 
 - `docker build .`: Build a Dockerfile and create your own Image based on the file
   - `-t NAME:TAG`: Assign a NAME and a TAG to an image
-- `docker run IMAGE_NAME`: Create and start a new container based on image IMAGENAME (or
+- `docker run IMAGE_NAME`: Create and start a new container based on image IMAGE_NAME (or
 use the image id)
   - `--name NAME`: Assign a NAME to the container. The name can be used for stopping and
 removing etc.
@@ -57,4 +57,4 @@ container id)
 - `docker push IMAGE`: Push an image to DockerHub (or another registry) - the image name/
 tag must include the repository name/ url
 - `docker pull IMAGE`: Pull (download) an image from DockerHub (or another registry) - this
-is done automatically if you just docker run IMAGE and the image wasn't pulled before
+is done automatically if you just run `docker run IMAGE` and the image wasn't pulled before
