@@ -26,3 +26,10 @@ If you want to look at logs and keep listening, you can *follow* with
 ```
 docker logs -f CONTAINER_NAME
 ```
+
+## Remove
+
+- Use `docker rm` to remove containers
+- You cannot remove a running container, you have to stop them first
+- You can delete multiple containers with `docker rm NAME1 NAME2`
+- You can remove **ALL** stopped containers with `docker container prune`
