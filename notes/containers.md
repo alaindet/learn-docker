@@ -33,3 +33,20 @@ docker logs -f CONTAINER_NAME
 - You cannot remove a running container, you have to stop them first
 - You can delete multiple containers with `docker rm NAME1 NAME2`
 - You can remove **ALL** stopped containers with `docker container prune`
+
+### Automatically remove
+
+- The flag `--rm` of `docker run` allows to automatically remove containers that exited
+
+### Copy files into containers
+
+#### From host to container
+
+- Copy files from external inside containers, like `docker cp SOURCE_FOLDER CONTAINER_IMAGE:/DESTINATION_FOLDER`
+- Example: `docker cp assets/. cranky_diffie:/assets_folder`
+
+#### From container to host
+
+```
+docker cp cranky_diffie:/assets_folder from_container
+```
