@@ -48,6 +48,7 @@ function renderDoorForm(userAnswer = null, correctAnswer) {
       <body>
         <section>
           <h1>Doors of Durin</h1>
+          <em>Speak, friend, and enter</em>
           ${feedbackBlock}
         </section>
         ${interactiveBlock}
