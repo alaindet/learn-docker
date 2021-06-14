@@ -19,10 +19,13 @@ app.use(
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  const args = [userAnswer, correctAnswer];
-  if (userAnswer === correctAnswer) {
+  const sanitizedUserAnswer = userAnswer ? userAnswer.toLowerCase() : userAnswer;
+  const args = [sanitizedUserAnswer, correctAnswer];
+
+  if (sanitizedUserAnswer === correctAnswer) {
     userAnswer = null;
   }
+
   res.send(renderDoorForm(...args));
 });
 

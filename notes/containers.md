@@ -50,3 +50,9 @@ docker logs -f CONTAINER_NAME
 ```
 docker cp cranky_diffie:/assets_folder from_container
 ```
+
+### Create a container with given name (called *tag*)
+
+```
+docker run --name MY_CONTAINER_NAME [OTHER_OPTIONS] IMAGE_ID
+```
