@@ -1,18 +1,23 @@
-function renderFeedbackBlock(correct, answer) {
+function _renderFeedbackBlock(correct, answer) {
   switch (correct) {
     case true:
-      return '<p>Doors are opening!</p>';
+      return `
+        <p>Doors are opening!</p>
+      `;
     case false:
       return `
+        <em>Speak, friend, and enter</em>
         <p>Your answer was: <strong>${answer}</strong></p>
         <p>Doors are shut, try again...</p>
       `;
     case null:
-      return '<p>Answer the riddle to open the doors</p>';
+      return `
+        <em>Speak, friend, and enter</em>
+      `;
   }
 }
 
-function renderInteractiveBlock(correct) {
+function _renderInteractiveBlock(correct) {
   switch (correct) {
     case true:
       return `
@@ -25,7 +30,7 @@ function renderInteractiveBlock(correct) {
       return `
         <form action="/answer" method="POST">
           <div class="form-control">
-            <label>What do you say?</label>
+            <label>What is your answer?</label>
             <input type="text" name="answer" autofocus>
           </div>
           <button type="Submit">Send Answer</button>
@@ -37,8 +42,8 @@ function renderInteractiveBlock(correct) {
 function renderDoorForm(userAnswer = null, correctAnswer) {
 
   const isCorrect = (userAnswer !== null) ? userAnswer === correctAnswer : null;
-  const feedbackBlock = renderFeedbackBlock(isCorrect, userAnswer);
-  const interactiveBlock = renderInteractiveBlock(isCorrect);
+  const feedbackBlock = _renderFeedbackBlock(isCorrect, userAnswer);
+  const interactiveBlock = _renderInteractiveBlock(isCorrect);
 
   return `
     <html>
@@ -48,7 +53,6 @@ function renderDoorForm(userAnswer = null, correctAnswer) {
       <body>
         <section>
           <h1>Doors of Durin</h1>
-          <em>Speak, friend, and enter</em>
           ${feedbackBlock}
         </section>
         ${interactiveBlock}
