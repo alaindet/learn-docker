@@ -22,16 +22,30 @@ app.get('/exists', (req, res) => {
   res.sendFile(filePath);
 });
 
+const folderExists = (folderPath) => {
+  try {
+    fs.access(tempFolderPath);
+    return true;
+  } catch (exception) {
+    return false;
+  }
+};
+
 app.post('/create', async (req, res) => {
+
   const title = req.body.title;
   const content = req.body.text;
-
   const adjTitle = title.toLowerCase();
-
-  const tempFilePath = path.join(__dirname, 'temp', adjTitle + '.txt');
+  const tempFolderPath = path.join(__dirname, 'temp');
+  const tempFilePath = path.join(tempFolderPath, adjTitle + '.txt');
   const finalFilePath = path.join(__dirname, 'feedback', adjTitle + '.txt');
 
+  if (!folderExists(tempFolderPath)) {
+    await fs.mkdir(tempFolderPath);
+  }
+
   await fs.writeFile(tempFilePath, content);
+
   exists(finalFilePath, async (exists) => {
     if (exists) {
       res.redirect('/exists');
