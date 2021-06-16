@@ -52,3 +52,16 @@ where `SOME_ABSOLUTE_PATH` is an absolute path on your machine (cannot be relati
 - Instead of an absolute path, you can use some variables like
   - macOS / Linux `-v $(pwd):/app`
   - Windows `-v "%cd%":/app`
+
+#### Node.js example
+
+1. ```
+   cd /apps/volumes-demo
+   ```
+2. ```
+   docker build -t vols-im .
+   ```
+3. ```
+   docker run -d -p 3000:80 --name vols-co -v vols-vo:/app/feedback -v "R:\projects\learn-docker\apps\volumes-demo:/app" -v /app/node_modules vols-im
+   ```
+   This command creates a container named `vols-co` from an image `vols-im` in detached mode, mapping port 3000 of host to port 80 of container. It then binds a volume named `vols-vo` to the folder `/app/feedback` of the container, then binds the host current folder (`"%cd%"` on Windows) to the `/app` on the container, then creates an anonymous volume attached to the `/app/node_modules` container folder in order to preserve it
