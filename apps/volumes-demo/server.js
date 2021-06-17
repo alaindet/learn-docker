@@ -7,6 +7,15 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const folderExists = (folderPath) => {
+  try {
+    fs.access(tempFolderPath);
+    return true;
+  } catch (exception) {
+    return false;
+  }
+};
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static('public'));
@@ -21,15 +30,6 @@ app.get('/exists', (req, res) => {
   const filePath = path.join(__dirname, 'pages', 'exists.html');
   res.sendFile(filePath);
 });
-
-const folderExists = (folderPath) => {
-  try {
-    fs.access(tempFolderPath);
-    return true;
-  } catch (exception) {
-    return false;
-  }
-};
 
 app.post('/create', async (req, res) => {
 
