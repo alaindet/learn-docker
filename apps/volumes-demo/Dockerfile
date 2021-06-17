@@ -15,4 +15,4 @@ EXPOSE 80
 # inside the container
 # VOLUME [ "/app/node_modules" ]
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
