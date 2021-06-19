@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 80
+EXPOSE 8080
 
 # Equivalent to "docker run ... -v /app/node_modules"
 # Creates an anonymous volume that preserves node_modules
