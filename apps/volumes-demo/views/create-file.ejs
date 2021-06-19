@@ -1,0 +1,59 @@
+<%#
+# Variables
+- pageTitle
+- ?feedback
+#%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+
+  <header>
+    <h1><a href="/"><%= pageTitle %></a></h1>
+  </header>
+  
+  <main>
+
+    <%# Feedback #%>
+    <% if (locals.feedback && locals.feedback !== null) { %>
+      <section>
+        <p><%= feedback.message %></p>
+        <p>
+          See file here:
+          <a href="<%= feedback.createFile %>"><%= feedback.createFile %></a>
+        </p>
+      </section>
+    <% } %>
+
+    <section>
+      <h2>Create a file</h2>
+      <form action="/create" method="POST">
+
+        <!-- Title -->
+        <div class="form-control">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title">
+        </div>
+
+        <!-- Content -->
+        <div class="form-control">
+          <label for="text">Content</label>
+          <textarea name="text" id="text" rows="10"></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit">Create</button>
+
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>

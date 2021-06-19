@@ -1,0 +1,37 @@
+<%#
+# Variables
+- pageTitle
+- fileTitle
+- fileContent
+#%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+
+  <header>
+    <h1><a href="/"><%= pageTitle %></a></h1>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Title: <code><%= fileTitle %></code></h2>
+      <p>Content: <%= fileContent %></p>
+    </section>
+
+    <section>
+      <a href="/">&lArr; Create a new file</a>
+    </section>
+
+  </main>
+
+</body>
+</html>

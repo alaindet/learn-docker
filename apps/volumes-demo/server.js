@@ -1,60 +1,25 @@
-const fs = require('fs').promises;
-const exists = require('fs').exists;
-const path = require('path');
-
 const express = require('express');
-const bodyParser = require('body-parser');
+const config = require('./config');
+const utils = require('./utils');
+const createFileController = require('./controllers/create-file');
+const readFileController = require('./controllers/read-file');
 
+// Setup
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+app.set('views', config.paths.views);
+app.use(express.static(config.paths.public));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// Routes
+app.get('/', createFileController.createFileForm);
+app.post('/create', createFileController.createFile);
+app.get('/read/:filename', readFileController.readFile);
 
-app.use(express.static('public'));
-app.use('/feedback', express.static('feedback'));
-
-app.get('/', (req, res) => {
-  const filePath = path.join(__dirname, 'pages', 'feedback.html');
-  res.sendFile(filePath);
-});
-
-app.get('/exists', (req, res) => {
-  const filePath = path.join(__dirname, 'pages', 'exists.html');
-  res.sendFile(filePath);
-});
-
-const folderExists = (folderPath) => {
-  try {
-    fs.access(tempFolderPath);
-    return true;
-  } catch (exception) {
-    return false;
-  }
-};
-
-app.post('/create', async (req, res) => {
-
-  const title = req.body.title;
-  const content = req.body.text;
-  const adjTitle = title.toLowerCase();
-  const tempFolderPath = path.join(__dirname, 'temp');
-  const tempFilePath = path.join(tempFolderPath, adjTitle + '.txt');
-  const finalFilePath = path.join(__dirname, 'feedback', adjTitle + '.txt');
-
-  if (!folderExists(tempFolderPath)) {
-    await fs.mkdir(tempFolderPath);
-  }
-
-  await fs.writeFile(tempFilePath, content);
-
-  exists(finalFilePath, async (exists) => {
-    if (exists) {
-      res.redirect('/exists');
-    } else {
-      await fs.copyFile(tempFilePath, finalFilePath);
-      await fs.unlink(tempFilePath);
-      res.redirect('/');
-    }
-  });
-});
-
-app.listen(80);
+// Bootstrap
+app.listen(
+  config.http.port,
+  () => utils.log.write(
+    `File creator demo started on port ${config.http.port}`
+  ),
+);
