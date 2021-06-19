@@ -1,7 +1,7 @@
 node_modules/
 
-storage/temp/
-!storage/temp/.gitkeep
+# storage/temp/
+# !storage/temp/.gitkeep
 
-public/
-!public/files/.gitkeep
+# public/
+# !public/files/.gitkeep
