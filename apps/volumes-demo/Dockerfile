@@ -1,18 +1,24 @@
 FROM node:16-alpine3.11
 
-WORKDIR /app
+# Use non-root user
+USER node
 
-COPY package.json .
+# Create app folder and allow "node" user to write into it
+RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
 
+WORKDIR /home/node/app
+
+# Copy package.json and package-lock.json files
+COPY --chown=node:node package*.json .
+
+# Install dependencies
 RUN npm install
 
-COPY . .
+# Copy all app files
+COPY --chown=node:node . .
 
+# Expose port 8080
 EXPOSE 8080
 
-# Equivalent to "docker run ... -v /app/node_modules"
-# Creates an anonymous volume that preserves node_modules
-# inside the container
-# VOLUME [ "/app/node_modules" ]
-
+# Start app
 CMD ["npm", "start"]

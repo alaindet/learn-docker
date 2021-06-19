@@ -7,7 +7,7 @@ There are two types of data storage in Docker
    - Named volumes
 2. **Bind Mounts** (*Managed by you*)
 
-- Docker manages paths on your machine (which is not explicit) and maps them to anonymous and named volumes
+- Docker manages paths on your machine (which are not explicit) and maps them to anonymous and named volumes
 - Volumes are accessed via `docker volume`
 - *Anonymous volumes* are created automatically when a container is created and removed automatically **ONLY IF** the container was created via `--rm`
 - Otherwise, anonymous volumes just fall into a limbo since new containers create new anynomous volumes automatically and should be removed
@@ -62,6 +62,6 @@ where `SOME_ABSOLUTE_PATH` is an absolute path on your machine (cannot be relati
    docker build -t vols-im .
    ```
 3. ```
-   docker run -d -p 3000:80 --name vols-co -v vols-vo:/app/feedback -v "R:\projects\learn-docker\apps\volumes-demo:/app" -v /app/node_modules vols-im
+   docker run -d -p 3000:8080 --rm --name vols-co -v /home/node/app/node_modules -v $(pwd):/home/node/app -v vols-vo:/home/node/app/public/files vols-im
    ```
    This command creates a container named `vols-co` from an image `vols-im` in detached mode, mapping port 3000 of host to port 80 of container. It then binds a volume named `vols-vo` to the folder `/app/feedback` of the container, then binds the host current folder (`"%cd%"` on Windows) to the `/app` on the container, then creates an anonymous volume attached to the `/app/node_modules` container folder in order to preserve it
