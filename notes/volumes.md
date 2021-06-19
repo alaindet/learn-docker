@@ -9,9 +9,37 @@ There are two types of data storage in Docker
 
 - Docker manages paths on your machine (which are not explicit) and maps them to anonymous and named volumes
 - Volumes are accessed via `docker volume`
-- *Anonymous volumes* are created automatically when a container is created and removed automatically **ONLY IF** the container was created via `--rm`
-- Otherwise, anonymous volumes just fall into a limbo since new containers create new anynomous volumes automatically and should be removed
-- *Named volumes* are perfect for persistent data which you don't need to edit directly, they are created while creating a container but they *survive* a container, meaning any other container (including the one that created the volume) can access that volume
+
+## Anonymous volumes
+- *Anonymous volumes* are created automatically when a container is created and they are removed when the same container is removed
+- *Anonymous volumes* can be created via `docker run` (Ex.: `docker run -v SOME_CONTAINER_PATH`) but also via `Dockerfile`, ex.:
+  ```
+  FROM node
+  # ...
+  VOLUME [ "/home/node/app/node_modules"]
+  CMD ["npm", "start"]
+  ```
+- They are exclusively available from that container only
+- They persist as long as the container exists (they survive when using `docker stiop` and `docker start`, but they are destroyed when using `docker run --rm` or `docker rm CONTAINER_ID`)
+- They cannot be shared by any two containers
+- They have a *perfect use case* when you want to lock some container's data and resist overwriting from named volumes and bind mounts
+- They are preferrable when having third-party dependencies (Ex.: **node_modules**) so that the container can delegate this data to the host machine
+
+## Named volumes
+- They are perfect for persistent data between multiple containers
+- They are created only while creating a container but they *survive* a container, meaning any other container (including the one that created the volume) can access that volume
+- They can be accessed by multiple running containers at the same time
+- They cannot be created in a `Dockerfile` like *Anonymous Volumes* but they **MUST** be created inside a `docker run` command (Ex.: `docker run ... -v VOLUME_NAME:SOME_CONTAINER_PATH`)
+- They can be removed only with a dedicated command `docker volume rm VOLUME_ID`
+
+## Bind mounts
+- The best use is in *development mode* since you are mapping a folder from the host machine directly inside the container
+- They look like aliases used in *named volumes*, but they are not tied to any creating container and the aliases are actually **absolute paths**
+- They can be shared by multiple containers
+- They are very limited compared to named volumes, since
+  - They are completely managed by the user
+  - You cannot manage it with any Docker command
+  - They rely on the host machine file system (using absolute paths)
 
 ## List all volumes
 
@@ -36,7 +64,7 @@ It creates a `vol_name` named volume and links it to the `/app/feedback` path in
 
 ## Bind Mounts
 
-- Similar to volumes, but links between containers and the host OS are *clear* and *explicit*
+- Similar to volumes, but links between containers and the host machine are *clear* and *explicit*
 - Allows for persistence and editability (ex.: for source code)
 - Handled by the developer
 

@@ -20,5 +20,8 @@ COPY --chown=node:node . .
 # Expose port 8080
 EXPOSE 8080
 
+VOLUME [ "/home/node/app/storage/temp" ]
+VOLUME [ "/home/node/app/node_modules"]
+
 # Start app
 CMD ["npm", "start"]
