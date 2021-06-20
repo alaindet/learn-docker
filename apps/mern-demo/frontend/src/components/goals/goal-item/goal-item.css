@@ -1,12 +1,34 @@
 .goal-item {
   margin: 1rem 0;
   padding: 1rem;
-  border: 1px solid #570080;
-  color: white;
-  background-color: #570080;
+  color: #074170;
+  border: 2px solid #ccc;
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 30px;
+  border-radius: 0.5rem;
   cursor: pointer;
+  transition: 0.15s all ease-out;
+  position: relative;
+}
+
+.goal-item__dismiss {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  color: inherit;
+  font-size: 2.5rem;
+  transition: 0.15s all ease-out;
+}
+
+.goal-item:hover {
+  background-color: #07417020;
+  border-color: #074170;
+}
+
+.goal-item:hover .goal-item__dismiss {
+  transform: translateY(-50%);
+  opacity: 1;
 }

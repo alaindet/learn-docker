@@ -15,7 +15,7 @@ app.use(middlewares.cors);
 // Set routes
 app.get('/goals', goalsController.read);
 app.post('/goals', goalsController.create);
-app.delete('/goals', goalsController.remove);
+app.delete('/goals/:id', goalsController.remove);
 
 // Connect to database
 const { dns, connectOptions } = config.mongoose;

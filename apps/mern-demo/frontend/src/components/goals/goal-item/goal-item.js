@@ -8,8 +8,9 @@ export function GoalItem({
   onDelete,
 }) {
   return (
-    <li className="goal-item" onClick={() => onDelete.bind(id)}>
-      {text}
+    <li className="goal-item" onClick={() => onDelete(id)}>
+      <span className="goal-item__text">{text}</span>
+      <span className="goal-item__dismiss">&times;</span>
     </li>
   );
 }

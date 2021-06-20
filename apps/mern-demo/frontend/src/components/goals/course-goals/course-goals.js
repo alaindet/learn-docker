@@ -1,8 +1,8 @@
 import React from 'react';
 
 import './course-goals.css';
-import { Card } from '../ui';
-import { GoalItem } from './goal-item';
+import { Card } from '../../ui';
+import { GoalItem } from '../goal-item/goal-item';
 
 export function CourseGoals({
   goals,
@@ -14,7 +14,7 @@ export function CourseGoals({
   return (
     <section id='course-goals'>
       <Card>
-        {hasNoGoals && <h2>No goals found. Start adding some!</h2>}
+        {hasNoGoals && <p>No goals found. Start adding some!</p>}
         <ul>
           {goals.map((goal) => (
             <GoalItem
@@ -25,6 +25,7 @@ export function CourseGoals({
             />
           ))}
         </ul>
+        {!hasNoGoals && <p>Click on items to delete them</p>}
       </Card>
     </section>
   );

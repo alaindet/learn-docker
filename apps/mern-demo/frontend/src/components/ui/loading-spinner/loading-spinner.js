@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './LoadingSpinner.css';
+import './loading-spinner.css';
 
 export function LoadingSpinner() {
   return (

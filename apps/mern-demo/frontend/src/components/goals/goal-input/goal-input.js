@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import './goal-input.css';
-import { Card } from '../ui';
+import { Card } from '../../ui';
 
 export function GoalInput({
   onAddGoal,
@@ -30,14 +30,14 @@ export function GoalInput({
     <section id='goal-input'>
       <Card>
         <form onSubmit={goalSubmitHandler}>
-          <label htmlFor='text'>New Goal</label>
+          <label htmlFor='text'>Add a new goal</label>
           <input
             type='text'
             id='text'
             value={enteredGoalText}
             onChange={updateGoalTextHandler}
           />
-          <button>Add Goal</button>
+          <button>Add goal</button>
         </form>
       </Card>
     </section>

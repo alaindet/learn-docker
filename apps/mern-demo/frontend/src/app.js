@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { GoalInput, CourseGoals } from './components/goals';
 import { ErrorAlert } from './components/ui';
-
-const API_GOALS = 'http://localhost/goals';
-const ERROR_FETCH = 'ERROR: Could not fetch goals from the server';
-const ERROR_CREATE = 'ERROR: Could not create goal on the server';
-const ERROR_DELETE = 'ERROR: Could not delete goal from the server';
+import * as config from './config';
 
 export function App() {
 
@@ -20,7 +16,7 @@ export function App() {
       await request();
       onFinish();
     } catch (error) {
-      setError(err.message);
+      setError(error.message);
     }
   }
 
@@ -30,10 +26,10 @@ export function App() {
       handleRequest({
         onStart: () => setIsLoading(true),
         request: async () => {
-          const response = await fetch(API_GOALS);
+          const response = await fetch(config.api.goals);
           const resData = await response.json();
           if (!response.ok) {
-            throw new Error(resData.message || ERROR_FETCH);
+            throw new Error(resData.message || config.error.fetch);
           }
           setLoadedGoals(resData.goals);
         },
@@ -52,11 +48,11 @@ export function App() {
         const body = JSON.stringify({ text: goalText });
         const headers = { 'Content-Type': 'application/json' };
         const requestOptions = { method: 'POST', body, headers };
-        const response = await fetch(API_GOALS, requestOptions);
+        const response = await fetch(config.api.goals, requestOptions);
         const resData = await response.json();
 
         if (!response.ok) {
-          throw new Error(resData.message || ERROR_CREATE);
+          throw new Error(resData.message || config.error.create);
         }
 
         setLoadedGoals(prevGoals => {
@@ -77,13 +73,13 @@ export function App() {
       onStart: () => setIsLoading(true),
       request: async () => {
 
-        const url = `${API_GOALS}${goalId}`;
+        const url = `${config.api.goals}/${goalId}`;
         const requestOptions = { method: 'DELETE' };
         const response = await fetch(url, requestOptions);
         const responseData = await response.json();
 
         if (!response.ok) {
-          throw new Error(responseData.message || ERROR_DELETE);
+          throw new Error(responseData.message || config.error.delete);
         }
 
         setLoadedGoals(oldGoals => {

@@ -1,3 +1,3 @@
 export const api = {
-  goals: 'http://localhost/goals',
+  goals: 'http://localhost:8080/goals',
 };
