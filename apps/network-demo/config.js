@@ -6,6 +6,7 @@ module.exports = {
     }
   },
   mongoose: {
-    dns: 'mongodb://localhost:27017/swfavorites',
+    // dns: 'mongodb://localhost:27017/swfavorites',
+    dns: 'mongodb://host.docker.internal:27017/swfavorites',
   },
 };
