@@ -90,6 +90,9 @@ where `SOME_ABSOLUTE_PATH` is an absolute path on your machine (cannot be relati
    docker build -t vols-im .
    ```
 3. ```
-   docker run -d -p 3000:8080 --rm --name vols-co -v /home/node/app/node_modules -v $(pwd):/home/node/app -v vols-vo:/home/node/app/public/files vols-im
+   docker run -d -p 3000:8080 --rm --name vols-co -v /home/node/app/node_modules -v /home/app/storage/temp -v $(pwd):/home/node/app:ro -v vols-vo:/home/node/app/public/files vols-im
    ```
    This command creates a container named `vols-co` from an image `vols-im` in detached mode, mapping port 3000 of host to port 80 of container. It then binds a volume named `vols-vo` to the folder `/app/feedback` of the container, then binds the host current folder (`"%cd%"` on Windows) to the `/app` on the container, then creates an anonymous volume attached to the `/app/node_modules` container folder in order to preserve it
+
+### Read-only bind mounts
+- If you add a third argument `ro` to a bind mount declaration, it becomes read-only so that the container cannot write into it, only the host machine can write on it. (ex.: `$(pwd):/app:ro`)

@@ -20,8 +20,10 @@ COPY --chown=node:node . .
 # Expose port 8080
 EXPOSE 8080
 
-VOLUME [ "/home/node/app/storage/temp" ]
-VOLUME [ "/home/node/app/node_modules"]
+# They should be declared inside the docker run command in order to override
+# named volumes and bind mounts declarations
+# VOLUME [ "/home/node/app/storage/temp" ]
+# VOLUME [ "/home/node/app/node_modules"]
 
 # Start app
 CMD ["npm", "start"]
