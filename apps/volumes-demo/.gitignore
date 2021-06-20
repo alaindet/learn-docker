@@ -5,3 +5,6 @@ node_modules/
 
 # public/
 # !public/files/.gitkeep
+
+*.env
+!.env.example
