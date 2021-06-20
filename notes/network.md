@@ -12,3 +12,18 @@ When building applications, it's pretty common to have multiple containers commu
 
 - Docker maps it to the internal IP address of the host machine, it's like `localhost` for containers running on the same host machine
 - It should **NOT** be used in production, only in development
+- It is needed to make a container communicate with the host machine (ex.: a dockerized app talking to a MongoDB server installed on the host machine)
+
+## Container networks
+
+- They are also called just *networks*
+- They are completely managed via the `docker network` command which has these subcommands
+  - `connect`
+  - `create`
+  - `disconnect`
+  - `inspect`
+  - `ls`
+  - `prune`
+  - `rm`
+- It is possible to create a *network* that gathers more than one container inside the same network, by using something like this `docker run --network my_network`
+- All containers in the same network can have intra-network communication easily
