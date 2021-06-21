@@ -5,13 +5,13 @@
 ```
 docker network create mern-net
 
-docker run --rm -d --name mongodb-con --network mern-net mongo
+docker run --rm -d --name mongodb-con -v mern-vol:/data/db -e MONGO_INITDB_ROOT_USERNAME=foobar -e MONGO_INITDB_ROOT_PASSWORD=foobar --network mern-net mongo
 
 cd backend
 
 docker build -t mern-be-im .
 
-docker run --rm -d -p 8080:80 -e APP_PORT=80 -e APP_MONGODB_CONTAINER_NAME=mongodb-con -e APP_NAME="Goals App" --network mern-net --name mern-be-con mern-be-im
+docker run --rm -d -p 8080:80 -e APP_PORT=80 -e APP_MONGODB_CONTAINER_NAME=mongodb-con -e APP_NAME="Goals App" -e APP_MONGODB_USERNAME=foobar -e APP_MONGODB_PASSWORD=foobar --network mern-net --name mern-be-con mern-be-im
 
 cd frontend
 

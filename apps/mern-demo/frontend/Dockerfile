@@ -1,6 +1,6 @@
 # Development Dockerfile
 
-FROM node
+FROM node:14
 
 WORKDIR /app
 
