@@ -11,5 +11,5 @@ cd backend
 
 docker build -t mern-be-im .
 
-docker run -d --name mern-be-con -p 3001:80 -e APP_MONGODB_CONTAINER_NAME=mongodb-con -e APP_PORT=80 -e APP_NAME="Goals app" --network mern-net mern-be-im
+docker run -d -p 8080:80 -e APP_PORT=80 -e APP_MONGODB_CONTAINER_NAME=mongodb-con -e APP_NAME="Goals App" --network mern-net --name mern-be-con mern-be-im
 ```
