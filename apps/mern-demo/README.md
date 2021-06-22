@@ -1,5 +1,7 @@
 # MERN stack demo
 
+This is a fullstack JavaScript application using Node/Express, Mongo DB and React. This setup is a *development* setup as it uses *nodemon* on the backend and the *webpack development server* on React. The setup allows for live coding both the backend and the frontend via Docker's **bind mounts**
+
 ## Usage
 
 ```
@@ -18,7 +20,7 @@ cd frontend
 docker build -t mern-fe-im .
 
 # -it flag is needed by Webpack development server
-docker run --name mern-fe-con -p 3000:3000 --rm -d -it mern-fe-im
+docker run --name mern-fe-con -v $(pwd)/src:/app/src -p 3000:3000 --rm -d -it mern-fe-im
 ```
 
 ### Notes
