@@ -10,3 +10,9 @@
 - By default, Docker Compose shuts down everything and removes container, **but** it persists volumes. To remove them, use `docker-compose down -v`
 - Docker Compose can create images if needed, via the `build` instruction
 - Docker Compose appends a prefix (the folder name) and a suffix to any container name, but it allows your code to reference to the names defined in the `docker-compose.yaml` as well
+
+## `build` and `up`
+- Run `docker-compose up --build` to force a re-build of all images
+- Run `docker-compose build` to just build images without running containers
+- Multiple `docker-compose up` use cached instructions
+- When you run `docker-compose up` when containers defined as services are already running, Docker just checks if current state matches `docker-compose.yaml` and at best it spins missing containers, but it **DOES NOT** create multiple containers from the same image

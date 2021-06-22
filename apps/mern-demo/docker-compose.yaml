@@ -3,15 +3,11 @@ version: '3.8'
 services:
 
   mongodb:
-
     image: 'mongo:4.4.6-bionic'
-
     volumes:
       - mern-db:/data/db
-
     env_file:
       - ./env/mongodb.env
-
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: foobar
     #   MONGO_INITDB_ROOT_PASSWORD: foobar
@@ -26,10 +22,8 @@ services:
     #   - mern-net
 
   backend:
-
     # Build an image instead of using an existing official one
     build: ./backend
-
     # # Alternative
     # build:
     #   context: ./backend
@@ -38,38 +32,30 @@ services:
     #   # dockerfile: Dockerfile
     #   args:
     #     myarg: 1
-
     ports:
       - '8080:80'
-
     volumes:
       - mern-logs:/app/storage/logs # This is a named volume
       - ./backend:/app # This is a bind mount
       - /app/node_modules # This is an anonymous volume
-
     env_file:
       - ./env/backend.env
-
     # Defers container running after the listed dependencies
     depends_on:
       - mongodb
 
   frontend:
-
     build: ./frontend
-
     ports:
       - '3000:3000'
-    
     volumes:
       - ./frontend/src:/app/src
-    
     # interactive mode (keep STDIN open)
     stdin_open: true
-
     # Terminal
     tty: true
-
+    # If you want to force some container name
+    # container_name: frontend-app
     depends_on:
       - backend
 
