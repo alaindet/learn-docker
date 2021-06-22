@@ -25,12 +25,39 @@ services:
     # networks:
     #   - mern-net
 
-  # TODO
-  # backend:
+  backend:
+
+    # Build an image instead of using an existing official one
+    build: ./backend
+
+    # # Alternative
+    # build:
+    #   context: ./backend
+    #   # Useful when the dockerfile has a different name
+    #   # Ex.: "Dockerfile-dev"
+    #   # dockerfile: Dockerfile
+    #   args:
+    #     myarg: 1
+
+    ports:
+      - '8080:80'
+
+    volumes:
+      - mern-logs:/app/storage/logs # This is a named volume
+      - ./backend:/app # This is a bind mount
+      - /app/node_modules # This is an anonymous volume
+
+    env_file:
+      - ./env/backend.env
+
+    # Defers container running after the listed dependencies
+    depends_on:
+      - mongodb
 
   # TODO
   # frontend:
 
+# This lists all named volumes
 volumes:
-  # This is a named volume
   mern-db:
+  mern-logs:

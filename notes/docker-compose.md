@@ -8,3 +8,5 @@
 - By default, services are removed when stopped (like the `docker run --rm` flag)
 - By default, Docker Compose creates a network for the containers running inside it
 - By default, Docker Compose shuts down everything and removes container, **but** it persists volumes. To remove them, use `docker-compose down -v`
+- Docker Compose can create images if needed, via the `build` instruction
+- Docker Compose appends a prefix (the folder name) and a suffix to any container name, but it allows your code to reference to the names defined in the `docker-compose.yaml` as well
