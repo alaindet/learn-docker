@@ -54,8 +54,24 @@ services:
     depends_on:
       - mongodb
 
-  # TODO
-  # frontend:
+  frontend:
+
+    build: ./frontend
+
+    ports:
+      - '3000:3000'
+    
+    volumes:
+      - ./frontend/src:/app/src
+    
+    # interactive mode (keep STDIN open)
+    stdin_open: true
+
+    # Terminal
+    tty: true
+
+    depends_on:
+      - backend
 
 # This lists all named volumes
 volumes:
