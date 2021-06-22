@@ -8,8 +8,10 @@ This is a fullstack JavaScript application using Node/Express, Mongo DB and Reac
 # Create network
 docker network create mern-net
 
+# Download MongoDB 4.4.6-bionic
+
 # Run MongoDB
-docker run --rm -d --name mongodb-con -v mern-mongo-data:/data/db -e MONGO_INITDB_ROOT_USERNAME=foobar -e MONGO_INITDB_ROOT_PASSWORD=foobar --network mern-net mongo
+docker run --rm -d --name mongodb-con -v mern-mongo-data:/data/db -e MONGO_INITDB_ROOT_USERNAME=foobar -e MONGO_INITDB_ROOT_PASSWORD=foobar --network mern-net mongo:4.4.6-bionic
 
 # Move to backend
 cd backend
@@ -38,3 +40,13 @@ docker stop mern-fe-con mern-be-con mongodb-con
 
 - Even if the frontend and the backend are in the same network, you **HAVE TO** publish both the backend's and frontend's ports because communication happens in the browser
 - You can skip the network flag when running the frontend container
+
+## Usage with `docker-compose`
+
+```
+# Starts every service in detached mode
+docker-compose up -d
+
+# Removes volumes as well
+docker-compose down -v
+```

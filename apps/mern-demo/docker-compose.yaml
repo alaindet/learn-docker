@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+
+  mongodb:
+
+    image: 'mongo:4.4.6-bionic'
+
+    volumes:
+      - mern-db:/data/db
+
+    env_file:
+      - ./env/mongodb.env
+
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: foobar
+    #   MONGO_INITDB_ROOT_PASSWORD: foobar
+
+    #   # Alternative 1
+    #   # - MONGO_INITDB_ROOT_USERNAME=foobar
+    #   # - MONGO_INITDB_ROOT_PASSWORD=foobar
+
+    # Docker Compose creates a network automatically for containers running
+    # inside it, but you can specify a network explicitly like this
+    # networks:
+    #   - mern-net
+
+  # TODO
+  # backend:
+
+  # TODO
+  # frontend:
+
+volumes:
+  # This is a named volume
+  mern-db:
