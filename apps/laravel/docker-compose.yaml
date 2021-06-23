@@ -6,7 +6,17 @@ services:
       - '8000:80'
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-  # php:
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+    volumes:
+      # "delegated" helps performance while developing
+      - ./src:/var/www/html:delegated
+    # No ports are needed since PHP is "invisible" from the host machine
+    # and it just gets called internally by NGINX
+    # ports:
+    #   - '3000:9000'
   # mysql:
   # composer:
   # artisan:
