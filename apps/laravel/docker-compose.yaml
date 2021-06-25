@@ -26,6 +26,6 @@ services:
       context: ./dockerfiles
       dockerfile: composer.dockerfile
     volumes:
-      - ./src:/var/www/html
+      - ./app:/home/laravel/app
   # artisan:
   # npm:

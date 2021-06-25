@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-docker-compose run --rm composer create-project --prefer-dist laravel/laravel .
+docker-compose build composer && docker-compose run --rm composer create-project --prefer-dist laravel/laravel /home/laravel/app
 ```
 
 ### File permission issues (Linux-only dockerfiles)
@@ -22,7 +22,7 @@ Files created by the `php` and `composer` containers are owned by the `root` use
 
 - `composer.dockerfile`
   ```
-  FROM composer:latest
+  FROM composer:2.1
   RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
   USER laravel
   WORKDIR /var/www/html
