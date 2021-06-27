@@ -1,0 +1,42 @@
+:root {
+  --color-bg: #333;
+  --color-header-bg: #f7df1e;
+  --color-header-text: #000;
+  --box-size: 40vw;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  background-color: var(--color-header-bg); 
+  color: var(--color-header-text);
+  width: var(--box-size);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  text-align: right;
+  padding: calc( var(--box-size) * 0.1 );
+  font-size: calc( var(--box-size) * 0.25 );
+}
+
+h1::after {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
