@@ -7,18 +7,17 @@ services:
     volumes:
       - ./app:/var/www/html
       # - ./nginx/nginx.conf:/etc/nginx/nginx.conft:ro
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default:ro
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
   php:
     build:
       context: ./dockerfiles
       dockerfile: php.dockerfile
     volumes:
-      # "delegated" helps performance while developing
-      - ./app:/var/www/html:delegated
+      - ./app:/var/www/html
     # No ports are needed since PHP is "invisible" from the host machine
     # and it just gets called internally by NGINX
     # ports:
-    #   - '3000:9000'
+      # - '3000:9000'
   mysql:
     image: mysql:5.7
     env_file:

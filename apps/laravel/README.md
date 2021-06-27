@@ -28,3 +28,13 @@ Files created by the `php` and `composer` containers are owned by the `root` use
   WORKDIR /var/www/html
   ENTRYPOINT [ "composer", "--ignore-platform-reqs" ]
   ```
+
+## Usage
+
+```
+# With direct logs
+docker-compose up server php mysql
+
+# Without direct logs
+docker-compose up -d server php mysql
+```
