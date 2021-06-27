@@ -37,4 +37,13 @@ docker-compose up server php mysql
 
 # Without direct logs
 docker-compose up -d server php mysql
+
+# Rebuild images, run server which runs dependencies as well
+docker-compose up -d --build server
+```
+
+### Run `artisan` utility software
+
+```
+docker-compose run --rm artisan migrate
 ```
