@@ -1,0 +1,14 @@
+{
+  "name": "multi-container-deploy-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alaindet/learn-docker"
+  },
+  "author": "Alain D'Ettorre <alain.det@gmail.com>",
+  "license": "MIT"
+}
